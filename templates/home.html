@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title_block %} {{ title }} {% endblock %}
+
+{% block message %}
+{% if messages %}
+{% for message in messages %}
+<div class="text-center py-3 alert pt-3 alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close text-primary" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
+
+
+{% block body %}
+
+{% endblock %}

@@ -1,0 +1,33 @@
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block style %}
+<style>
+    body{
+        font-family: 'Times New Roman', Times, serif;
+        background-color: #f3f3f7;
+    }
+    
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row ">
+    <div class="col-md-1 col-lg-2">
+    </div>
+    <div class="col-md-10 col-lg-8">
+        <h2>Create New Post</h2>
+        <div class="card shadow border-primary p-3 ">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form|crispy}}
+
+            </form>
+            <button type="button" class="btn btn-md btn-primary shadow mt-3 w-25" >Submit</button>
+        </div>
+    </div>
+    <div class="col-md-1 col-lg-2"></div>
+
+</div>
+
+{% endblock %}
