@@ -15,3 +15,17 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_comment', )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comment', )
+    body = models.TextField()
+    comment_date = models.DateTimeField(auto_now_add=True, )
+    updated_at = models.DateTimeField(auto_now=True) 
+
+    class Meta:
+        ordering = ('-comment_date', )
+       
+    def __str__(self):
+        return 'Comment by {} on {}'.format(self.user.username, self.post.title) 

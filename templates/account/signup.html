@@ -1,8 +1,10 @@
 {% extends 'account/auth_layout.html' %}
 {% load crispy_forms_tags %}
 
+{% block title %} AdnBlog | Sign Up {% endblock %}
+
 {% block auth %}
-<h3>Create Account </h3>
+<h4 class="text-center">Create Account in to AdnBlog </h4>
 <div class="registration-form-container">
     <form action="" method="POST">
         {% csrf_token %}

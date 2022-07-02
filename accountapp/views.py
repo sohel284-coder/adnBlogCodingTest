@@ -1,12 +1,13 @@
 
-from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 from accountapp.forms import CreateNewUserForm
+from blogapp.models import Post, Comment
 
 
 
@@ -56,3 +57,30 @@ def login_page(request):
 def logout_user(request):
     logout(request)
     return redirect('login_page') 
+
+
+def user_list(request, ):
+    users = User.objects.all().exclude(is_staff=True)
+    return render(request, 'user/user_list.html', {
+        'users':users
+    })
+
+def user_delete(request, pk):
+    user = User.objects.get(pk=pk)
+    try:
+        posts = Post.objects.filter(author=user)
+        for post in posts:
+            post.delete()
+        print(posts)    
+    except Exception as e:
+        print(e)
+    try:
+        commnents = Comment.objects.filter(user=user)
+        for comment in commnents:
+            comment.delete()
+        print(commnents)
+    except Exception as e:
+        print(e)    
+    user.delete()
+    messages.info(request, 'successfull user deleted')
+    return redirect('user_list')

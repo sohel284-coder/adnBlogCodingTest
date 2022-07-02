@@ -1,0 +1,46 @@
+body {
+    background-color: #f3f4f7;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.nav-item {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+.navbar-brand{
+    margin-bottom: 10px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.card-img-top {
+    flex: 1;
+    object-fit: contain;
+}
+
+.img-card {
+    border: none;
+}
+
+h2{
+    font-weight: 700;
+}
+h3, h4{
+    font-weight: 700;
+    color: #262626;
+}
+
+
+.outer-area {
+    margin-top: 50px;
+    max-width: 600px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    transform: scale(1.09);
+}
+footer{
+    bottom: 0;
+    position: fixed;
+    left: auto;
+    width: 100%;
+}

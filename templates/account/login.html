@@ -1,8 +1,10 @@
 {% extends 'account/auth_layout.html' %}
 {% load crispy_forms_tags %}
 
-{% block auth %}
 
+{% block title %} AdnBlog | Login {% endblock %}
+
+{% block auth %}
 {% if messages %}
 {% for message in messages %}
 <div class="text-center py-3 alert pt-3 alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -13,7 +15,7 @@
 {% endif %}
 
 <div class="login-form-container">
-    <h2>Login</h2>
+    <h4 class="text-center">Log in to AdnBlog </h4>
     <form action="" method="POST">
         {% csrf_token %}
         {% if login_failed %}

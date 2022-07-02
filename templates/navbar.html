@@ -1,34 +1,41 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light py-4">
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-4 shadow">
     <div class="container">
-      <a class="navbar-brand" href="#">Adn Blog</a>
+      <a class="navbar-brand" href="{% url 'home' %}">Adn Blog</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item me-2">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="btn btn-md btn-outline-secondary shadow-sm {% if request.resolver_match.url_name == 'home' %} active {% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
           </li>
+          {% if request.user.is_staff %}
+          <li class="nav-item me-2">
+            <a class="btn btn-md btn-outline-info shadow-sm {% if request.resolver_match.url_name == 'user_list' %} active {% endif %}" type="button" href="{% url 'user_list' %}">All Users</a>
+          </li>
+          {% endif %}
           
           {% if user.is_authenticated %}
           <li class="nav-item me-2">
-            <a class="nav-link" href="{% url 'post_create' %}">Add new Post</a>
+            <a class="btn btn-md btn-outline-primary shadow-sm {% if request.resolver_match.url_name == 'post_create' %} active {% endif %} " type="button" href="{% url 'post_create' %}">Add New Post</a>
           </li>
           <li class="nav-item dropdown me-2">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="dropdown-toggle btn btn-md btn-outline-success" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {{user.username}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item text-center text-primary"  type="button"  href="{% url 'logout_user' %}">Logout</a></li> 
+              <li><a class="dropdown-item text-center  {% if request.resolver_match.url_name == 'user_wise_post_list' %} active {% endif %}"  type="button"  href="{% url 'user_wise_post_list' user=request.user.pk %}">My Blogs</a></li>
+              <li><a class="dropdown-item text-center "  type="button"  href="{% url 'logout_user' %}">Logout</a></li> 
             </ul>
           </li>
+              
           {% else %}
           <li class="nav-item  me-2">
-            <a class="nav-link btn btn-sm btn-primary text-white" type="button" href="{% url 'login_page' %}">Login for Add New Post</a>
+            <a class="btn btn-md btn-outline-primary shadow-sm {% if request.resolver_match.url_name == 'login_page' %} active {% endif %}" type="button" href="{% url 'login_page' %}">Login</a>
           </li>
           <li class="nav-item  me-2">
-            <a class="nav-link btn btn-sm btn-outline-secondary" type="button" href="{% url 'sign_up' %}">Sign Up</a>
+            <a class="btn btn-md btn-outline-success shadow-sm {% if request.resolver_match.url_name == 'sign_up' %} active {% endif %}" type="button" href="{% url 'sign_up' %}">Sign Up</a>
           </li>
           {% endif %}
         </ul>

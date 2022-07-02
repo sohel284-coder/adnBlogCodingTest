@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %} AdnBlog | User List {% endblock %}
+
+{% block message %}
+{% if messages %}
+{% for message in messages %}
+<div class="text-center py-3 alert pt-3 alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close text-primary" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-1"></div>
+    <div class="col-xl-10">
+        
+        {% if users %}
+        <h2>All Users</h2>
+        <table class="table table-border shadow bg-white w-100">
+            <thead class="bg-success">
+              <tr class="text-white text-center">
+                <th scope="col">Full name</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Date</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in users %}
+              <tr class="text-center">
+              
+                <td>{{user.get_full_name}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{ user.date_joined|date:"d-m-Y"}}</td>
+                <td><a href="{% url 'user_delete' pk=user.pk %}" type="button" class="btn btn-sm btn-danger" >Delete</a></td>
+              </tr>
+              {% endfor %}
+
+              
+              
+            </tbody>
+        </table>
+        {% else %}
+          <h3 class="text-danger text-center">No user Found</h3>
+        {% endif %}
+          
+          
+
+    </div>
+
+    <div class="col-xl-1"></div>
+
+</div>
+{% endblock %}
