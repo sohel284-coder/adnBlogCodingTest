@@ -39,6 +39,11 @@
         <p class="" align="justify">
             {{post.description}}
         </p>
+        {% if flag %}
+        <div class="post-delete-btn" align="center">
+            <a href="{% url 'delete_post' slug=post.slug %}" type="button" class="btn btn-sm btn-outline-danger shadow">Delete</a>
+        </div>
+        {% endif %}
     </div>
     <div class="comment-section mt-3">
         {% if user.is_authenticated %}

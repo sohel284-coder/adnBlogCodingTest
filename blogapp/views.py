@@ -10,9 +10,9 @@ from django.contrib import messages
 
 
 
-def home(request, ):
+def all_blogs(request, ):
     posts = Post.objects.all().order_by('-publish_date')
-    return render(request, 'home.html', {
+    return render(request, 'blog/all_blogs.html', {
         'posts':posts, 
     })
 
@@ -43,8 +43,10 @@ def post_create(request, ):
 
 def post_details(request, slug):
     post = Post.objects.get(slug=slug)
+    flag = False   
+    if post.author == request.user:
+        flag = True
    
-    
     if request.method == 'POST':
         # A comment was posted
         comment_form = CommentForm(data=request.POST)
@@ -64,6 +66,7 @@ def post_details(request, slug):
     return render(request, 'blog/post_details.html', {
         'post':post, 
         'comment_form':comment_form,
+        'flag':flag,
     })
 
 

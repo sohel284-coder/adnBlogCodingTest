@@ -14,7 +14,7 @@ class CreateNewUserForm(UserCreationForm):
         'class': 'form-control mt-3',  
     }))
     email = forms.EmailField(required=True, label="", widget=forms.TextInput(attrs={
-        'placeholder':'Enter your Email Address',
+        'placeholder':'Enter your email address',
         'class': 'form-control mt-3',
     }))
     username = forms.CharField(required=True, label="", widget=forms.TextInput(attrs={
@@ -22,11 +22,11 @@ class CreateNewUserForm(UserCreationForm):
         'class': 'form-control mt-3',  
     }))
     password1 = forms.CharField(min_length=8, max_length=32, label="", required=True, widget=forms.PasswordInput(attrs={
-        'placeholder': 'Enter Password',
+        'placeholder': 'Enter password',
         'class': 'form-control mt-3',
     }))
     password2 = forms.CharField(min_length=8, max_length=32, label="", required=True, widget=forms.PasswordInput(attrs={
-        'placeholder': 'Enter Password',
+        'placeholder': 'Enter password',
         'class': 'form-control mt-3',
     }))
     class Meta:
@@ -41,6 +41,7 @@ class CreateNewUserForm(UserCreationForm):
             raise forms.ValidationError("The email is already in use")
         except User.DoesNotExist:
             return email
+     
 
     def clean(self):
         super(CreateNewUserForm, self).clean()

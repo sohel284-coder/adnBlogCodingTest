@@ -41,7 +41,7 @@ def login_page(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, 'Successfully login')
-                return redirect('home')
+                return redirect('all_blogs')
             else:
                 context['login_failed'] = True
                 print(context)
@@ -60,7 +60,7 @@ def logout_user(request):
 
 
 def user_list(request, ):
-    users = User.objects.all().exclude(is_staff=True)
+    users = User.objects.all().order_by('-date_joined')
     return render(request, 'user/user_list.html', {
         'users':users
     })
